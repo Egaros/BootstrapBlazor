@@ -184,3 +184,14 @@
         </TableColumns>
     </Table>
 </Block>
+
+<Block Title="Excel 模式" Introduction="通过设置表格的 <code>IsExcel</code> 属性，使组件呈现为类似 <code>Excel</code>">
+    <Table TItem="Foo"
+           IsPagination="true" PageItemsSource="@PageItemsSource" IsExcel="true"
+           IsStriped="true" IsBordered="true" IsMultipleSelect="true" AutoGenerateColumns="true"
+           ShowToolbar="true" ShowExtendButtons="true" ShowSkeleton="true" UseInjectDataService="true">
+        <TableColumns>
+            <TableColumn @bind-Field="@context.Hobby" Data="@Hobbys" />
+        </TableColumns>
+    </Table>
+</Block>
