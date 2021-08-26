@@ -346,7 +346,8 @@
 }
 
 .table-hover > tbody > tr.is-detail:hover,
-.table-hover > tbody > tr.is-edit.active {
+.table-hover > tbody > tr.is-edit.active,
+.table-excel > tbody > tr:hover {
     --bs-table-accent-bg: none;
 }
 
@@ -576,4 +577,14 @@ form .table .table-cell > textarea {
 
 .table-search {
     margin-bottom: .5rem;
+}
+
+.table-excel .table-cell > input.form-control,
+.table-excel .table-cell .datetime-picker,
+.table-excel .table-cell .select {
+    min-width: 120px;
+}
+
+.table-excel .table-cell textarea.form-control {
+    min-width: 200px;
 }

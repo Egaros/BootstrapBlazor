@@ -328,13 +328,15 @@ namespace BootstrapBlazor.Components
 
             if (IsCheckboxList(fieldType) && item.Data != null)
             {
-                builder.AddAttribute(6, nameof(CheckboxList<IEnumerable<string>>.Items), item.Data);
+                var data = item.Data.Select(d => new SelectedItem(d.Value, d.Text)).ToList();
+                builder.AddAttribute(6, nameof(CheckboxList<IEnumerable<string>>.Items), data);
             }
 
             // 增加非枚举类,手动设定 ComponentType 为 Select 并且 Data 有值 自动生成下拉框
             if (item.Data != null && item.ComponentType == typeof(Select<>).MakeGenericType(fieldType))
             {
-                builder.AddAttribute(7, nameof(Select<SelectedItem>.Items), item.Data);
+                var data = item.Data.Select(d => new SelectedItem(d.Value, d.Text)).ToList();
+                builder.AddAttribute(7, nameof(Select<SelectedItem>.Items), data);
             }
 
             // 设置 SkipValidate 参数

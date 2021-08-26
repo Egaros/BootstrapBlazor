@@ -616,9 +616,9 @@ RenderFragment<TItem> RenderRow => item =>
                             <i class="@GetTreeClassString(item)"></i>
                         </div>
                     }
-                    @if (isInCell)
+                    @if (IsExcel || isInCell)
                     {
-                        @RenderCell(col)
+                        @RenderCell(col, IsExcel ? item : null)
                     }
                     else
                     {
