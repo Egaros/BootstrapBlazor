@@ -148,6 +148,12 @@ namespace BootstrapBlazor.Components
         public bool IsTracking { get; set; }
 
         /// <summary>
+        /// 获得/设置 组件工作模式为 Excel 模式 默认 false
+        /// </summary>
+        [Parameter]
+        public bool IsExcel { get; set; }
+
+        /// <summary>
         /// 获得/设置 缩进大小 默认为 16 单位 px
         /// </summary>
         [Parameter]

@@ -21,161 +21,163 @@
     }
     else
     {
-		@if(ShowSearch && SearchMode == SearchMode.Top)
-		{
-			<div class="table-search">
-				@if(SearchTemplate != null)
-				{
-					@SearchTemplate.Invoke(SearchModel)
-				}
-				else
-				{
-					<Card>
-						<CardHeader>
-							<div class="d-flex">
-								<div class="flex-fill">@SearchModalTitle</div>
-								@if(ShowResetButton)
-								{
-									<Button Color="@Color.Secondary" Icon="fa fa-trash" class="btn-xs ms-2" OnClickWithoutRender="@ClearSearchClick">
-										<span class="d-none d-sm-inline-block">@ResetSearchButtonText</span>
-									</Button>
-								}
-								@if (ShowSearchButton)
-								{
-									<Button Color="@Color.Primary" Icon="fa fa-search" class="btn-xs ms-2" OnClickWithoutRender="@SearchClick">
-										<span class="d-none d-sm-inline-block">@SearchButtonText</span>
-									</Button>
-								}
-							</div>
-						</CardHeader>
-						<CardBody>
-							<EditorForm Model="SearchModel" Items="GetSearchColumns()" ItemsPerRow="SearchDialogItemsPerRow" RowType="SearchDialogRowType" LabelAlign="SearchDialogLabelAlign">
-							</EditorForm>
-						</CardBody>
-					</Card>
-				}
-			</div>
-		}
-        <div class="table-toolbar">
-            @if (ShowToolbar)
-            {
-                <TableToolbar TItem="TItem" OnGetSelectedRows="@GetSelectedRows">
-                    @if (ShowDefaultButtons)
-                    {
-                        @if (ShowAddButton)
-                        {
-                            <TableToolbarButton TItem="TItem" Color="Color.Success" OnClick="@AddAsync" Icon="fa fa-plus" Text="@AddButtonText" />
-                        }
-                        @if (ShowEditButton)
-                        {
-                            <TableToolbarButton TItem="TItem" Color="Color.Primary" OnClick="@EditAsync" Icon="fa fa-pencil" Text="@EditButtonText" />
-                        }
-                        @if (ShowDeleteButton)
-                        {
-                            <TableToolbarPopconfirmButton TItem="TItem" Color="Color.Danger"
-                                                          Icon="fa fa-remove" Text="@DeleteButtonText"
-                                                          OnBeforeClick="@ConfirmDelete" OnConfirm="@DeleteAsync()"
-                                                          CloseButtonText="@CancelDeleteButtonText" Content="@ConfirmDeleteContentText"
-                                                          ConfirmButtonText="@ConfirmDeleteButtonText" ConfirmButtonColor="Color.Danger" />
-                        }
-                    }
-                    @TableToolbarTemplate
-                </TableToolbar>
-                <div class="float-end table-toolbar-button btn-group table-column-right">
-                    @if (ShowRefresh)
-                    {
-                        <Button Icon="fa fa-refresh" Text="@RefreshButtonText" Color="@Color.Secondary" OnClickWithoutRender="@OnClickRefreshAsync" />
-                    }
-					@if(ShowCardView)
-					{
-                        <Button Icon="fa fa-bars" Text="@CardViewButtonText" Color="@Color.Secondary" OnClick="@OnClickCardView" />
-					}
-                    @if (ShowColumnList)
-                    {
-                        <div class="btn-group btn-col" role="group">
-                            <button class="btn btn-secondary dropdown-toggle" data-bs-auto-close="false" data-bs-toggle="dropdown" type="button" title="@ColumnButtonTitleText">
-                                <i class="fa fa-th-list"></i>
-                                <span class="d-none d-sm-inline-block">@ColumnButtonText</span>
-                                <span class="caret"></span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                @foreach (var item in Columns)
+        @if (ShowSearch && SearchMode == SearchMode.Top)
+        {
+            <div class="table-search">
+                @if (SearchTemplate != null)
+                {
+                    @SearchTemplate.Invoke(SearchModel)
+                }
+                else
+                {
+                    <Card>
+                        <CardHeader>
+                            <div class="d-flex">
+                                <div class="flex-fill">@SearchModalTitle</div>
+                                @if (ShowResetButton)
                                 {
-                                    var poco = ColumnVisibles.First(i => i.FieldName == item.GetFieldName());
-                                    <div class="dropdown-item">
-                                        <Checkbox ShowAfterLabel="true" IsDisabled="@GetColumnsListState(item)"
-                                                  DisplayText="@item.GetDisplayName()" @bind-Value="@poco.Visible">
-                                        </Checkbox>
-                                    </div>
+                                    <Button Color="@Color.Secondary" Icon="fa fa-trash" class="btn-xs ms-2" OnClickWithoutRender="@ClearSearchClick">
+                                        <span class="d-none d-sm-inline-block">@ResetSearchButtonText</span>
+                                    </Button>
+                                }
+                                @if (ShowSearchButton)
+                                {
+                                    <Button Color="@Color.Primary" Icon="fa fa-search" class="btn-xs ms-2" OnClickWithoutRender="@SearchClick">
+                                        <span class="d-none d-sm-inline-block">@SearchButtonText</span>
+                                    </Button>
                                 }
                             </div>
-                        </div>
-                    }
-                    @if (ShowExportButton)
-                    {
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button" title="@ExportButtonText">
-                                <i class="fa fa-download"></i>
-                                <span class="d-none d-sm-inline-block">@ExportButtonText</span>
-                                <span class="caret"></span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-item">
-                                    <i class="fa fa-file-text-o"></i>
-                                    <span>CSV （未实现）</span>
-                                </div>
-                                <div class="dropdown-item" @onclick="@ExportAsync">
-                                    <i class="fa fa-file-excel-o"></i>
-                                    <span>MS-Excel</span>
-                                </div>
-                                <div class="dropdown-item">
-                                    <i class="fa fa-file-pdf-o"></i>
-                                    <span>PDF（未实现）</span>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            }
-            @if (ShowSearch && SearchMode == SearchMode.Popup)
-            {
-				<div class="float-end table-toolbar-button btn-group">
-					@if (ShowSearchText)
-					{
-						<div class="input-group">
-							<BootstrapInput class="table-toolbar-search" placeholder="@SearchPlaceholderText" @bind-Value="@SearchText">
-								<Tooltip Placement="Placement.Top" Title="@SearchTooltip" IsHtml="true" />
-							</BootstrapInput>
-							<Button Color="@Color.Secondary" Icon="fa fa-search" OnClickWithoutRender="@SearchClick">
-								<span class="d-none d-sm-inline-block">@SearchButtonText</span>
-							</Button>
-							@if (ShowResetButton)
-							{
-								<Button Color="@Color.Secondary" Icon="fa fa-trash" OnClickWithoutRender="@ClearSearchClick">
-									<span class="d-none d-sm-inline-block">@ResetSearchButtonText</span>
-								</Button>
-							}
-							@if (ShowAdvancedSearch)
-							{
-								@RenderAdvanceSearchButton
-							}
-						</div>
-					}
-					else if (ShowAdvancedSearch)
-					{
-						@RenderAdvanceSearchButton
-					}
-				</div>
-            }
-        </div>
-
-        @if (ShowTopPagination && TotalCount > 0 && IsPagination)
-        {
-            <div class="table-pagination">
-                <Pagination PageItemsSource="@PageItemsSource" PageItems="@PageItems" TotalCount="@TotalCount" PageIndex="@PageIndex" OnPageClick="@OnPageClick" OnPageItemsChanged="@OnPageItemsChanged"></Pagination>
+                        </CardHeader>
+                        <CardBody>
+                            <EditorForm Model="SearchModel" Items="GetSearchColumns()" ItemsPerRow="SearchDialogItemsPerRow" RowType="SearchDialogRowType" LabelAlign="SearchDialogLabelAlign">
+                            </EditorForm>
+                        </CardBody>
+                    </Card>
+                }
             </div>
         }
+        @if (!IsExcel)
+        {
+            <div class="table-toolbar">
+                @if (ShowToolbar)
+                {
+                    <TableToolbar TItem="TItem" OnGetSelectedRows="@GetSelectedRows">
+                        @if (ShowDefaultButtons)
+                        {
+                            @if (ShowAddButton)
+                            {
+                                <TableToolbarButton TItem="TItem" Color="Color.Success" OnClick="@AddAsync" Icon="fa fa-plus" Text="@AddButtonText" />
+                            }
+                            @if (ShowEditButton)
+                            {
+                                <TableToolbarButton TItem="TItem" Color="Color.Primary" OnClick="@EditAsync" Icon="fa fa-pencil" Text="@EditButtonText" />
+                            }
+                            @if (ShowDeleteButton)
+                            {
+                                <TableToolbarPopconfirmButton TItem="TItem" Color="Color.Danger"
+                                                              Icon="fa fa-remove" Text="@DeleteButtonText"
+                                                              OnBeforeClick="@ConfirmDelete" OnConfirm="@DeleteAsync()"
+                                                              CloseButtonText="@CancelDeleteButtonText" Content="@ConfirmDeleteContentText"
+                                                              ConfirmButtonText="@ConfirmDeleteButtonText" ConfirmButtonColor="Color.Danger" />
+                            }
+                        }
+                        @TableToolbarTemplate
+                    </TableToolbar>
+                    <div class="float-end table-toolbar-button btn-group table-column-right">
+                        @if (ShowRefresh)
+                        {
+                            <Button Icon="fa fa-refresh" Text="@RefreshButtonText" Color="@Color.Secondary" OnClickWithoutRender="@OnClickRefreshAsync" />
+                        }
+                        @if (ShowCardView)
+                        {
+                            <Button Icon="fa fa-bars" Text="@CardViewButtonText" Color="@Color.Secondary" OnClick="@OnClickCardView" />
+                        }
+                        @if (ShowColumnList)
+                        {
+                            <div class="btn-group btn-col" role="group">
+                                <button class="btn btn-secondary dropdown-toggle" data-bs-auto-close="false" data-bs-toggle="dropdown" type="button" title="@ColumnButtonTitleText">
+                                    <i class="fa fa-th-list"></i>
+                                    <span class="d-none d-sm-inline-block">@ColumnButtonText</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    @foreach (var item in Columns)
+                                    {
+                                        var poco = ColumnVisibles.First(i => i.FieldName == item.GetFieldName());
+                                        <div class="dropdown-item">
+                                            <Checkbox ShowAfterLabel="true" IsDisabled="@GetColumnsListState(item)"
+                                                      DisplayText="@item.GetDisplayName()" @bind-Value="@poco.Visible">
+                                            </Checkbox>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        @if (ShowExportButton)
+                        {
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button" title="@ExportButtonText">
+                                    <i class="fa fa-download"></i>
+                                    <span class="d-none d-sm-inline-block">@ExportButtonText</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-item">
+                                        <i class="fa fa-file-text-o"></i>
+                                        <span>CSV （未实现）</span>
+                                    </div>
+                                    <div class="dropdown-item" @onclick="@ExportAsync">
+                                        <i class="fa fa-file-excel-o"></i>
+                                        <span>MS-Excel</span>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        <span>PDF（未实现）</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                @if (ShowSearch && SearchMode == SearchMode.Popup)
+                {
+                    <div class="float-end table-toolbar-button btn-group">
+                        @if (ShowSearchText)
+                        {
+                            <div class="input-group">
+                                <BootstrapInput class="table-toolbar-search" placeholder="@SearchPlaceholderText" @bind-Value="@SearchText">
+                                    <Tooltip Placement="Placement.Top" Title="@SearchTooltip" IsHtml="true" />
+                                </BootstrapInput>
+                                <Button Color="@Color.Secondary" Icon="fa fa-search" OnClickWithoutRender="@SearchClick">
+                                    <span class="d-none d-sm-inline-block">@SearchButtonText</span>
+                                </Button>
+                                @if (ShowResetButton)
+                                {
+                                    <Button Color="@Color.Secondary" Icon="fa fa-trash" OnClickWithoutRender="@ClearSearchClick">
+                                        <span class="d-none d-sm-inline-block">@ResetSearchButtonText</span>
+                                    </Button>
+                                }
+                                @if (ShowAdvancedSearch)
+                                {
+                                    @RenderAdvanceSearchButton
+                                }
+                            </div>
+                        }
+                        else if (ShowAdvancedSearch)
+                        {
+                            @RenderAdvanceSearchButton
+                        }
+                    </div>
+                }
+            </div>
 
+            @if (ShowTopPagination && TotalCount > 0 && IsPagination)
+            {
+                <div class="table-pagination">
+                    <Pagination PageItemsSource="@PageItemsSource" PageItems="@PageItems" TotalCount="@TotalCount" PageIndex="@PageIndex" OnPageClick="@OnPageClick" OnPageItemsChanged="@OnPageItemsChanged"></Pagination>
+                </div>
+            }
+        }
         <div class="@WrapperClassName">
             @if (ActiveRenderMode == TableRenderMode.Table)
             {
@@ -327,7 +329,7 @@
             @RenderHeader.Invoke(false)
         }
         <tbody>
-            @if (EditMode == EditMode.EditForm && ShowAddForm)
+            @if (!IsExcel && EditMode == EditMode.EditForm && ShowAddForm)
             {
                 @RenderEditForm.Invoke(EditModel)
             }
@@ -338,7 +340,7 @@
             @foreach (var item in RowItems)
             {
                 @RenderRow.Invoke(item)
-                if (ShowDetails())
+                if (!IsExcel && ShowDetails())
                 {
                     var colspan = ColumnVisibles.Count(col => col.Visible);
                     if (IsMultipleSelect) colspan++;
@@ -363,7 +365,7 @@
                         </td>
                     </tr>
                 }
-                if (EditMode == EditMode.EditForm && ShowEditForm && SelectedItems.FirstOrDefault() == item)
+                if (!IsExcel && EditMode == EditMode.EditForm && ShowEditForm && SelectedItems.FirstOrDefault() == item)
                 {
                     @RenderEditForm.Invoke(EditModel)
                 }
@@ -418,7 +420,7 @@ RenderFragment<bool> RenderColgroup => hasScroll =>
             <col width="@col.Width" />
         }
     }
-    @if (ShowExtendButtons)
+    @if (!IsExcel && ShowExtendButtons)
     {
         <col width="@ExtendButtonColumnWidth" />
     }
@@ -482,7 +484,7 @@ RenderFragment<bool> RenderHeader => hasScroll =>
                 </DynamicElement>
             }
         }
-        @if (ShowExtendButtons)
+        @if (!IsExcel && ShowExtendButtons)
         {
             <th class="@ExtendButtonsColumnClass" style="@GetFixedExtendButtonsColumnStyleString(17)">
                 <div class="table-cell is-button-column">
@@ -531,7 +533,7 @@ RenderFragment<bool> RenderHeader => hasScroll =>
                     }
                 }
             </CascadingValue>
-            @if (ShowExtendButtons)
+            @if (!IsExcel && ShowExtendButtons)
             {
                 <th class="@ExtendButtonsColumnClass" style="@GetFixedExtendButtonsColumnStyleString(17)">
                     <div class="table-cell">&nbsp;</div>
@@ -549,7 +551,7 @@ RenderFragment<TItem> RenderRow => item =>
 @<DynamicElement TagName="tr" class="@GetRowClassString(item)"
                  TriggerClick="@(ClickToSelect || OnClickRowCallback != null)" OnClick="@ClickRow(item)"
                  TriggerDoubleClick="@(DoubleClickToEdit || OnDoubleClickRowCallback != null)" OnDoubleClick="@DoubleClickRow(item)">
-    @if (ShowDetails())
+    @if (!IsExcel && ShowDetails())
     {
         <td>
             <div class="@GetDetailBarClassString(item)">
@@ -633,7 +635,7 @@ RenderFragment<TItem> RenderRow => item =>
             </td>
         }
     }
-    @if (ShowExtendButtons)
+    @if (!IsExcel && ShowExtendButtons)
     {
         <td class="@FixedExtendButtonsColumnClassString" style="@GetFixedExtendButtonsColumnStyleString()">
             <div class="table-cell">
