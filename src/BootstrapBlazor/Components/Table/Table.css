@@ -585,6 +585,11 @@ form .table .table-cell > textarea {
     min-width: 120px;
 }
 
-.table-excel .table-cell textarea.form-control {
+.table-excel tbody .table-cell textarea.form-control {
     min-width: 200px;
+}
+
+.table-excel-toolbar {
+    display: none;
+    position: absolute;
 }

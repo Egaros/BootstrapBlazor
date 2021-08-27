@@ -49,6 +49,7 @@ namespace BootstrapBlazor.Components
             .AddClass("table-fixed", Height.HasValue)
             .AddClass("table-fixed-column", Columns.Any(c => c.Fixed))
             .AddClass("table-resize", AllowResizing)
+            .AddClass("position-relative", IsExcel && ActiveRenderMode == TableRenderMode.Table)
             .Build();
 
         /// <summary>

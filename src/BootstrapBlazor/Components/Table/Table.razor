@@ -197,11 +197,19 @@
                 {
                     <div class="overflow-auto">
                         @RenderTable.Invoke(true)
+                        @if (IsExcel)
+                        {
+                            @RenderExcelToolbar
+                        }
                     </div>
                 }
                 else
                 {
                     @RenderTable.Invoke(true)
+                    @if (IsExcel)
+                    {
+                        @RenderExcelToolbar
+                    }
                 }
                 if (!RowItems.Any() && ShowEmpty)
                 {
@@ -728,4 +736,10 @@ RenderFragment RenderAdvanceSearchButton =>
 @<Button class="@AdvanceSearchClass" Icon="fa fa-search-plus" OnClickWithoutRender="@(new Func<Task>(ShowSearchDialog))">
     <span class="d-none d-sm-inline-block">@AdvanceButtonText</span>
 </Button>;
+
+RenderFragment RenderExcelToolbar =>
+@<div class="table-excel-toolbar btn-group" role="group" aria-label="button group for table excel mode">
+    <Button Icon="fa fa-plus" Text="@AddButtonText" />
+    <PopConfirmButton Icon="fa fa-remove" Text="@DeleteButtonText" />
+</div>;
 }
