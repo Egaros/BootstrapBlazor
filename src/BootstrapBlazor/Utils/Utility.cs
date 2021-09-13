@@ -62,8 +62,8 @@ namespace BootstrapBlazor.Components
                 else if (TryGetProperty(cacheKey.Type, cacheKey.FieldName, out var propertyInfo))
                 {
                     // 回退查找 Display 标签
-                    dn = propertyInfo.GetCustomAttribute<DisplayAttribute>()?.Name
-                        ?? propertyInfo.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName;
+                    dn = propertyInfo.GetCustomAttribute<DisplayAttribute>(true)?.Name
+                        ?? propertyInfo.GetCustomAttribute<DisplayNameAttribute>(true)?.DisplayName;
 
                     // 回退查找资源文件通过 dn 查找匹配项 用于支持 Validation
                     if (!string.IsNullOrEmpty(dn) && !modelType.Assembly.IsDynamic)
@@ -124,7 +124,7 @@ namespace BootstrapBlazor.Components
                     }
                     else if (Utility.TryGetProperty(cacheKey.Type, cacheKey.FieldName, out var propertyInfo))
                     {
-                        var placeHolderAttribute = propertyInfo.GetCustomAttribute<PlaceHolderAttribute>();
+                        var placeHolderAttribute = propertyInfo.GetCustomAttribute<PlaceHolderAttribute>(true);
                         if (placeHolderAttribute != null)
                         {
                             placeHolder = placeHolderAttribute.Text;
@@ -460,8 +460,8 @@ namespace BootstrapBlazor.Components
             switch (type.Name)
             {
                 case nameof(String):
-                    var ph = Utility.GetPlaceHolder(model, fieldName) ?? placeholder;
-                    if (!string.IsNullOrEmpty(ph))
+                    var ph = item.PlaceHolder ?? Utility.GetPlaceHolder(model, fieldName) ?? placeholder;
+                    if (ph != null)
                     {
                         ret.Add(new("placeholder", ph));
                     }
@@ -624,5 +624,19 @@ namespace BootstrapBlazor.Components
             return Expression.Lambda<Func<object, IFormatProvider?, string>>(body, exp_p1, exp_p2);
         }
         #endregion
+
+        /// <summary>
+        /// 树状数据层次化方法
+        /// </summary>
+        /// <param name="items">数据集合</param>
+        /// <param name="parentItem">父级节点</param>
+        public static void CascadingTree(this List<TreeItem> items, TreeItem? parentItem = null)
+        {
+            items.ForEach(i =>
+            {
+                i.Parent = parentItem;
+                i.Items.CascadingTree(i);
+            });
+        }
     }
 }

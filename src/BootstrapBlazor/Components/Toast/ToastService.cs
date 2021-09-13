@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Website: https://www.blazor.zone or https://argozhang.github.io/
 
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
@@ -20,7 +21,8 @@ namespace BootstrapBlazor.Components
         /// 构造方法
         /// </summary>
         /// <param name="option"></param>
-        public ToastService(IOptionsMonitor<BootstrapBlazorOptions> option)
+        /// <param name="localizer"></param>
+        public ToastService(IOptionsMonitor<BootstrapBlazorOptions> option, IStringLocalizer<ToastService> localizer) : base(localizer)
         {
             _option = option.CurrentValue;
             _optionsReloadToken = option.OnChange(op => _option = op);
@@ -32,7 +34,10 @@ namespace BootstrapBlazor.Components
         /// <param name="option"></param>
         public override async Task Show(ToastOption option)
         {
-            if (!option.ForceDelay && _option.ToastDelay != 0) option.Delay = _option.ToastDelay;
+            if (!option.ForceDelay && _option.ToastDelay != 0)
+            {
+                option.Delay = _option.ToastDelay;
+            }
 
             await base.Show(option);
         }
@@ -77,6 +82,21 @@ namespace BootstrapBlazor.Components
         public Task Information(string? title = null, string? content = null, bool autoHide = true) => Show(new ToastOption()
         {
             Category = ToastCategory.Information,
+            IsAutoHide = autoHide,
+            Title = title ?? "",
+            Content = content ?? ""
+        });
+
+        /// <summary>
+        /// Toast 调用警告信息快捷方法
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="content"></param>
+        /// <param name="autoHide"></param>
+        /// <returns></returns>
+        public Task Warning(string? title = null, string? content = null, bool autoHide = true) => Show(new ToastOption()
+        {
+            Category = ToastCategory.Warning,
             IsAutoHide = autoHide,
             Title = title ?? "",
             Content = content ?? ""

@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Website: https://www.blazor.zone or https://argozhang.github.io/
 
-using System;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -49,22 +49,9 @@ namespace BootstrapBlazor.Components
         public string? Icon { get; set; }
 
         /// <summary>
-        /// 获得/设置 是否激活
-        /// </summary>
-        /// <value></value>
-        public bool IsActive { get; set; }
-
-        /// <summary>
         /// 获得/设置 是否被选中
         /// </summary>
         public bool Checked { get; set; }
-
-        /// <summary>
-        /// 获得/设置 是否被禁用 默认 false
-        /// </summary>
-        /// <value></value>
-        [Obsolete("请使用 IsDisabled 属性，本属性已过期", true)]
-        public bool Disabled { get; set; }
 
         /// <summary>
         /// 获得/设置 是否被禁用 默认 false
@@ -80,6 +67,11 @@ namespace BootstrapBlazor.Components
         /// 获取/设置 是否有子节点 默认 false 
         /// </summary>
         public bool HasChildNode { get; set; }
+
+        /// <summary>
+        /// 获得/设置 当前节点模板
+        /// </summary>
+        public RenderFragment? Template { get; set; }
 
         /// <summary>
         /// 获得 所有子项集合

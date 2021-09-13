@@ -6,7 +6,9 @@ using BootstrapBlazor.Components;
 using BootstrapBlazor.Shared.Common;
 using BootstrapBlazor.Shared.Pages.Components;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BootstrapBlazor.Shared.Pages
 {
@@ -17,9 +19,9 @@ namespace BootstrapBlazor.Shared.Pages
     {
         private IEnumerable<StepItem> Items { get; set; } = new StepItem[3]
         {
-            new StepItem() { Title = "步骤一" },
-            new StepItem() { Title = "步骤二" },
-            new StepItem() { Title = "步骤三" }
+            new StepItem() { Title = "步骤一" , Template = builder => { builder.OpenElement(0, "div"); builder.AddContent(1, "步骤一"); builder.CloseElement(); } },
+            new StepItem() { Title = "步骤二", Template = builder => { builder.OpenElement(0, "div"); builder.AddContent(1, "步骤二"); builder.CloseElement(); } },
+            new StepItem() { Title = "步骤三", Template = builder => { builder.OpenElement(0, "div"); builder.AddContent(1, "步骤三"); builder.CloseElement(); } }
         };
 
         private void NextStep()
@@ -52,137 +54,137 @@ namespace BootstrapBlazor.Shared.Pages
         /// <summary>
         /// 
         /// </summary>
+        [NotNull]
         private BlockLogger? Trace { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="status"></param>
-        private void OnStatusChanged(StepStatus status)
+        private Task OnStatusChanged(StepStatus status)
         {
-            Trace?.Log($"Steps Status: {status}");
+            Trace.Log($"Steps Status: {status}");
+            return Task.CompletedTask;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<AttributeItem> GetAttributes()
+        private IEnumerable<AttributeItem> GetAttributes() => new AttributeItem[]
         {
-            return new AttributeItem[]
-            {
-                new AttributeItem() {
-                    Name = "Items",
-                    Description = "设置步骤数据集合",
-                    Type = "IEnumerable<StepItem>",
-                    ValueList = " — ",
-                    DefaultValue = " — "
-                },
-                new AttributeItem() {
-                    Name = "IsVertical",
-                    Description = "显示方向",
-                    Type = "bool",
-                    ValueList = "true|false",
-                    DefaultValue = "false"
-                },
-                new AttributeItem() {
-                    Name = "IsCenter",
-                    Description = "进行居中对齐",
-                    Type = "bool",
-                    ValueList = "true|false",
-                    DefaultValue = "false"
-                },
-                new AttributeItem() {
-                    Name = "Status",
-                    Description = "设置当前步骤的状态",
-                    Type = "StepStatus",
-                    ValueList = "Wait|Process|Finish|Error|Success",
-                    DefaultValue = "Wait"
-                }
-            };
-        }
+            new AttributeItem() {
+                Name = "Items",
+                Description = Localizer["Desc1"]!,
+                Type = "IEnumerable<StepItem>",
+                ValueList = " — ",
+                DefaultValue = " — "
+            },
+            new AttributeItem() {
+                Name = "IsVertical",
+                Description = Localizer["Desc2"]!,
+                Type = "bool",
+                ValueList = "true|false",
+                DefaultValue = "false"
+            },
+            new AttributeItem() {
+                Name = "IsCenter",
+                Description = Localizer["Desc3"]!,
+                Type = "bool",
+                ValueList = "true|false",
+                DefaultValue = "false"
+            },
+            new AttributeItem() {
+                Name = "Status",
+                Description = Localizer["Desc4"]!,
+                Type = "StepStatus",
+                ValueList = "Wait|Process|Finish|Error|Success",
+                DefaultValue = "Wait"
+            }
+        };
 
-        private IEnumerable<AttributeItem> GetStepItemAttributes()
+        private IEnumerable<AttributeItem> GetStepItemAttributes() => new AttributeItem[]
         {
-            return new AttributeItem[]
-            {
-                new AttributeItem() {
-                    Name = "IsCenter",
-                    Description = "进行居中对齐",
-                    Type = "bool",
-                    ValueList = "true|false",
-                    DefaultValue = "false"
-                },
-                new AttributeItem() {
-                    Name = "IsIcon",
-                    Description = "进行使用图标进行步骤显示",
-                    Type = "bool",
-                    ValueList = "true|false",
-                    DefaultValue = "false"
-                },
-                new AttributeItem() {
-                    Name = "IsLast",
-                    Description = "是否为最后一个步骤",
-                    Type = "bool",
-                    ValueList = "true|false",
-                    DefaultValue = "false"
-                },
-                new AttributeItem() {
-                    Name = "StepIndex",
-                    Description = "步骤顺序号",
-                    Type = "int",
-                    ValueList = " — ",
-                    DefaultValue = "0"
-                },
-                new AttributeItem() {
-                    Name = "Space",
-                    Description = "间距不填写将自适应间距支持百分比",
-                    Type = "string",
-                    ValueList = " — ",
-                    DefaultValue = "—"
-                },
-                new AttributeItem() {
-                    Name = "Title",
-                    Description = "步骤显示文字",
-                    Type = "string",
-                    ValueList = " — ",
-                    DefaultValue = "—"
-                },
-                new AttributeItem() {
-                    Name = "Icon",
-                    Description = "步骤显示图标",
-                    Type = "string",
-                    ValueList = " — ",
-                    DefaultValue = " — "
-                },
-                new AttributeItem() {
-                    Name = "Description",
-                    Description = "描述信息",
-                    Type = "string",
-                    ValueList = " — ",
-                    DefaultValue = " — "
-                },
-                new AttributeItem() {
-                    Name = "Status",
-                    Description = "设置当前步骤的状态",
-                    Type = "StepStatus",
-                    ValueList = "Wait|Process|Finish|Error|Success",
-                    DefaultValue = "Wait"
-                }
-            };
-        }
+            new AttributeItem() {
+                Name = "IsCenter",
+                Description = Localizer["Att1"]!,
+                Type = "bool",
+                ValueList = "true|false",
+                DefaultValue = "false"
+            },
+            new AttributeItem() {
+                Name = "IsIcon",
+                Description = Localizer["Att2"]!,
+                Type = "bool",
+                ValueList = "true|false",
+                DefaultValue = "false"
+            },
+            new AttributeItem() {
+                Name = "IsLast",
+                Description = Localizer["Att3"]!,
+                Type = "bool",
+                ValueList = "true|false",
+                DefaultValue = "false"
+            },
+            new AttributeItem() {
+                Name = "StepIndex",
+                Description = Localizer["Att4"]!,
+                Type = "int",
+                ValueList = " — ",
+                DefaultValue = "0"
+            },
+            new AttributeItem() {
+                Name = "Space",
+                Description = Localizer["Att5"]!,
+                Type = "string",
+                ValueList = " — ",
+                DefaultValue = "—"
+            },
+            new AttributeItem() {
+                Name = "Title",
+                Description = Localizer["Att6"]!,
+                Type = "string",
+                ValueList = " — ",
+                DefaultValue = " — "
+            },
+            new AttributeItem() {
+                Name = "Icon",
+                Description = Localizer["Att7"]!,
+                Type = "string",
+                ValueList = " — ",
+                DefaultValue = " — "
+            },
+            new AttributeItem() {
+                Name = "Description",
+                Description = Localizer["Att8"]!,
+                Type = "string",
+                ValueList = " — ",
+                DefaultValue = " — "
+            },
+            new AttributeItem() {
+                Name = "Status",
+                Description = Localizer["Att9"]!,
+                Type = "StepStatus",
+                ValueList = "Wait|Process|Finish|Error|Success",
+                DefaultValue = "Wait"
+            },
+            new AttributeItem() {
+                Name = "Template",
+                Description = Localizer["Att10"]!,
+                Type = "RenderFragment",
+                ValueList = " — ",
+                DefaultValue = " — "
+            }
+        };
 
-        private IEnumerable<EventItem> GetEvents()
+        private IEnumerable<EventItem> GetEvents() => new List<EventItem>()
         {
-            return new List<EventItem>()
+            new EventItem()
             {
-                new EventItem()
-                {
-                    Name = "OnStatusChanged",
-                    Description="组件状态改变时回调委托",
-                    Type ="Action<StepStatus>"
-                }
-            };
-        }
+                Name = "OnStatusChanged",
+                Description = Localizer["Event1"]!,
+                Type ="Func<StepStatus, Task>"
+            }
+        };
     }
 }

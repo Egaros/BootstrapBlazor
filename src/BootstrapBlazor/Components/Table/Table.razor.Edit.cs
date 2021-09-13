@@ -97,13 +97,13 @@ namespace BootstrapBlazor.Components
         /// 获得/设置 被选中的数据集合
         /// </summary>
         [Parameter]
-        public IEnumerable<TItem>? SelectedRows { get; set; }
+        public List<TItem>? SelectedRows { get; set; }
 
         /// <summary>
         /// 获得/设置 被选中的数据集合回调委托
         /// </summary>
         [Parameter]
-        public EventCallback<IEnumerable<TItem>> SelectedRowsChanged { get; set; }
+        public EventCallback<List<TItem>> SelectedRowsChanged { get; set; }
 
         /// <summary>
         /// 获得/设置 行样式格式回调委托
@@ -485,7 +485,7 @@ namespace BootstrapBlazor.Components
         private EventCallback<MouseEventArgs> ClickUpdateButtonCallback() => EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
         {
             var context = new EditContext(EditModel);
-            await SaveAsync(context);
+            await SaveAsync(context, ItemChangedType.Update);
 
             // 回调外部自定义方法
             if (OnAfterSaveAsync != null)

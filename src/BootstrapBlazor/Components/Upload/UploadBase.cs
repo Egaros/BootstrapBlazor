@@ -51,7 +51,7 @@ namespace BootstrapBlazor.Components
         /// 获得/设置 点击删除按钮时回调此方法
         /// </summary>
         [Parameter]
-        public Func<string, Task<bool>>? OnDelete { get; set; }
+        public Func<UploadFile, Task<bool>>? OnDelete { get; set; }
 
         /// <summary>
         /// 获得/设置 点击浏览按钮时回调此方法
@@ -106,9 +106,6 @@ namespace BootstrapBlazor.Components
                     ErrorMessage = messages.FirstOrDefault(m => m.MemberNames.Any(f => f.Equals(CurrentFile.ValidateId, StringComparison.OrdinalIgnoreCase)))?.ErrorMessage;
                     IsValid = string.IsNullOrEmpty(ErrorMessage);
 
-                    // 控件自身数据验证时显示 tooltip
-                    // EditForm 数据验证时调用 tooltip('enable') 保证 tooltip 组件生成
-                    // 调用 tooltip('hide') 后导致鼠标悬停时 tooltip 无法正常显示
                     if (IsValid.HasValue && !IsValid.Value)
                     {
                         TooltipMethod = validProperty ? "show" : "enable";
@@ -134,11 +131,7 @@ namespace BootstrapBlazor.Components
             var ret = true;
             if (OnDelete != null)
             {
-                var fileName = item.OriginFileName ?? item.FileName;
-                if (!string.IsNullOrEmpty(fileName))
-                {
-                    ret = await OnDelete(fileName);
-                }
+                ret = await OnDelete(item);
             }
             return ret;
         }

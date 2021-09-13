@@ -197,6 +197,12 @@ namespace BootstrapBlazor.Shared.Shared
                 },
                 new()
                 {
+                    IsNew = true,
+                    Text = Localizer["Theme"],
+                    Url = "themes"
+                },
+                new()
+                {
                     Text = Localizer["LayoutPage"],
                     Url = "layout-page"
                 }
@@ -439,6 +445,12 @@ namespace BootstrapBlazor.Shared.Shared
                     IsNew = true,
                     Text = Localizer["Locator"],
                     Url = "locator"
+                },
+                new()
+                {
+                    IsNew = true,
+                    Text = Localizer["Print"],
+                    Url = "prints"
                 },
                 new()
                 {
@@ -759,6 +771,12 @@ namespace BootstrapBlazor.Shared.Shared
                 {
                     Text = Localizer["Dropdown"],
                     Url = "dropdowns"
+                },
+                new()
+                {
+                    IsNew = true,
+                    Text = Localizer["FullScreen"],
+                    Url = "fullscreens"
                 },
                 new()
                 {

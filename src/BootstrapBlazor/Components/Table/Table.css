@@ -3,12 +3,12 @@
 }
 
 .table-wrapper {
-    border-radius: 4px;
+    border-radius: var(--bs-border-radius);
     border: 1px solid #dee2e6;
 }
 
     .table-wrapper .table-fixed-header {
-        border-radius: 4px;
+        border-radius: var(--bs-border-radius);
     }
 
     .table-wrapper thead tr:first-child {
@@ -62,6 +62,7 @@
 
     .table thead th {
         white-space: nowrap;
+        vertical-align: top;
     }
 
         .table thead th.sortable:hover,
@@ -311,7 +312,7 @@
     justify-content: center;
     align-items: center;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: var(--bs-border-radius);
     padding: 2rem;
     flex: 1;
 }
@@ -508,14 +509,6 @@
     border-right: 1px solid #409eff;
 }
 
-.table-container .table-toolbar .btn-col .dropdown-item {
-    padding: .25rem 0;
-}
-
-    .table-container .table-toolbar .btn-col .dropdown-item .form-checkbox {
-        display: block;
-    }
-
 .table .table-cell.is-tree {
     cursor: pointer;
 }
@@ -548,6 +541,7 @@
 
 .table-bordered thead tr:last-child {
     border-bottom-width: 2px !important;
+    border-bottom-color: #c0c4cc;
 }
 
 .table-striped > tbody > tr.is-master:nth-of-type(odd) {

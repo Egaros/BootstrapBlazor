@@ -86,6 +86,11 @@ namespace BootstrapBlazor.Components
         public string? FormatString { get; set; }
 
         /// <summary>
+        /// 获得/设置 placeholder 文本 默认为 null
+        /// </summary>
+        public string? PlaceHolder { get; set; }
+
+        /// <summary>
         /// 获得/设置 列格式化回调委托
         /// </summary>
         public Func<object?, Task<string>>? Formatter { get; set; }
@@ -105,12 +110,10 @@ namespace BootstrapBlazor.Components
         /// </summary>
         public IEnumerable<KeyValuePair<string, object>>? ComponentParameters { get; set; }
 
-        RenderFragment<object>? ITableColumn.Template { get => Template; }
-
         /// <summary>
         /// 获得/设置 显示模板
         /// </summary>
-        internal RenderFragment<object>? Template { get; set; }
+        public RenderFragment<object>? Template { get; set; }
 
         /// <summary>
         /// 获得/设置 搜索模板

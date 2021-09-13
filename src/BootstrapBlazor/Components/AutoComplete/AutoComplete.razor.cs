@@ -1,4 +1,4 @@
-// Copyright (c) Argo Zhang (argo@163.com). All rights reserved.
+﻿// Copyright (c) Argo Zhang (argo@163.com). All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Website: https://www.blazor.zone or https://argozhang.github.io/
 
@@ -83,14 +83,16 @@ namespace BootstrapBlazor.Components
         private IStringLocalizer<AutoComplete>? Localizer { get; set; }
 
         private string _selectedItem = "";
+
         /// <summary>
-        /// 获得 候选项样式
+        /// 
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        protected string? ItemClassString(string item) => CssBuilder.Default("dropdown-item")
-            .AddClass("active", item == _selectedItem)
-            .Build();
+        protected ElementReference AutoCompleteElement { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected int? CurrentItemIndex { get; set; }
 
         /// <summary>
         /// OnInitialized 方法
@@ -106,6 +108,21 @@ namespace BootstrapBlazor.Components
         }
 
         /// <summary>
+        /// firstRender
+        /// </summary>
+        /// <param name="firstRender"></param>
+        /// <returns></returns>
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (CurrentItemIndex.HasValue)
+            {
+                await JSRuntime.InvokeVoidAsync(AutoCompleteElement, "bb_autoScrollItem", CurrentItemIndex.Value);
+            }
+        }
+
+        /// <summary>
         /// OnBlur 方法
         /// </summary>
         protected void OnBlur()
@@ -117,11 +134,21 @@ namespace BootstrapBlazor.Components
         /// <summary>
         /// 鼠标点击候选项时回调此方法
         /// </summary>
-        protected Task OnItemClick(string val)
+        protected virtual Task OnClickItem(string val)
         {
             CurrentValue = val;
             return Task.CompletedTask;
         }
+
+        /// <summary>
+        /// 获得/设置 是否跳过 Enter 按键处理 默认 false
+        /// </summary>
+        protected bool SkipEnter { get; set; }
+
+        /// <summary>
+        /// 获得/设置 是否跳过 Esc 按键处理 默认 false
+        /// </summary>
+        protected bool SkipEsc { get; set; }
 
         /// <summary>
         /// OnKeyUp 方法
@@ -148,14 +175,15 @@ namespace BootstrapBlazor.Components
                     FilterItems = DisplayCount == null ? items.ToList() : items.Take((int)DisplayCount).ToList();
                 }
                 _isLoading = false;
-                _isShown = true;
             }
 
             var source = FilterItems;
             if (source.Any())
             {
+                _isShown = true;
+
                 // 键盘向上选择
-                if (args.Key == "ArrowUp")
+                if (_isShown && args.Key == "ArrowUp")
                 {
                     var index = source.IndexOf(_selectedItem) - 1;
                     if (index < 0)
@@ -163,8 +191,9 @@ namespace BootstrapBlazor.Components
                         index = source.Count - 1;
                     }
                     _selectedItem = source[index];
+                    CurrentItemIndex = index;
                 }
-                else if (args.Key == "ArrowDown")
+                else if (_isShown && args.Key == "ArrowDown")
                 {
                     var index = source.IndexOf(_selectedItem) + 1;
                     if (index > source.Count - 1)
@@ -172,10 +201,15 @@ namespace BootstrapBlazor.Components
                         index = 0;
                     }
                     _selectedItem = source[index];
+                    CurrentItemIndex = index;
                 }
                 else if (args.Key == "Escape")
                 {
                     OnBlur();
+                    if (!SkipEsc && OnEscAsync != null)
+                    {
+                        await OnEscAsync(Value);
+                    }
                 }
                 else if (args.Key == "Enter")
                 {
@@ -183,6 +217,10 @@ namespace BootstrapBlazor.Components
                     {
                         CurrentValueAsString = _selectedItem;
                         OnBlur();
+                        if (!SkipEnter && OnEnterAsync != null)
+                        {
+                            await OnEnterAsync(Value);
+                        }
                     }
                 }
             }

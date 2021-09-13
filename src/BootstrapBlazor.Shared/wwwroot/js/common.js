@@ -185,25 +185,24 @@
             });
         },
         setTheme: function (css, cssList) {
-            var $link = $('link').filter(function (index, link) {
-                var href = $(link).attr('href');
-                return href === '_content/BootstrapBlazor/css/bootstrap.blazor.bundle.min.css';
+            $('link[rel="stylesheet"]').each(function (index, link) {
+                var theme = $(link).attr('href');
+                var $theme = cssList.filter(function (c) {
+                    return c !== "" && theme.indexOf(c) > -1;
+                });
+                if ($theme.length > 0) {
+                    $(link).remove();
+                    return false;
+                }
             });
-            var $targetLink = $link.next();
-            if ($link.length == 1) {
-                if (css === '') {
-                    // remove
-                    var $theme = cssList.filter(function (theme) {
-                        return $targetLink.attr('href') === theme;
-                    });
-                    if ($theme.length === 1) {
-                        $targetLink.remove();
-                    }
-                }
-                else {
-                    // append
-                    $link.after('<link rel="stylesheet" href="' + css + '">')
-                }
+
+            if (css !== "") {
+                var $link = $('link').filter(function (index, link) {
+                    var href = $(link).attr('href');
+                    return href.indexOf('_content/BootstrapBlazor/css/bootstrap.blazor.bundle.min.css') > -1;
+                });
+                // append
+                $link.after('<link rel="stylesheet" href="' + css + '">');
             }
         },
         bb_open: function (method) {
@@ -272,6 +271,20 @@
                     $('.theme-list.is-open').toggleClass('is-open').slideToggle('fade');
                 }
             });
+
+        // scorll
+        var prevScrollTop = 0;
+        $(document).on('scroll', function () {
+            var $header = $('app > header, .coms-search');
+            var currentScrollTop = $(document).scrollTop();
+            if (currentScrollTop > prevScrollTop) {
+                $header.addClass('hide');
+            }
+            else {
+                $header.removeClass('hide');
+            }
+            prevScrollTop = currentScrollTop;
+        });
     });
 
     $(function () {

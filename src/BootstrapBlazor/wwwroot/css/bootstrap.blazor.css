@@ -4,6 +4,14 @@
  * Licensed under MIT (https://github.com/dotnetcore/BootstrapBlazor/blob/main/LICENSE)
  */
 
+:root {
+    --bs-border-radius: .25rem;
+}
+
+:fullscreen {
+    background-color: #fff;
+}
+
 body, .form-control, .dropdown-menu, .form-select,
 .btn:not(.btn-xs):not(.btn-sm):not(.btn-md):not(.btn-lg):not(.btn-xl),
 .input-group-text {
@@ -494,197 +502,6 @@ form .form-control.is-display {
     }
 /*end footer*/
 
-/*step*/
-.steps {
-    display: flex;
-}
-
-.steps-horizontal {
-    white-space: nowrap;
-}
-
-.step {
-    position: relative;
-    flex-shrink: 1;
-}
-
-    .step.is-horizontal {
-        display: inline-block;
-    }
-
-    .step.is-center .step-head, .step.is-center .step-main {
-        text-align: center;
-    }
-
-.step-head {
-    position: relative;
-    width: 100%;
-    line-height: 1;
-}
-
-    .step-head.is-success {
-        color: #67c23a;
-        border-color: #67c23a;
-    }
-
-    .step-head.is-process {
-        color: #303133;
-        border-color: #303133;
-    }
-
-    .step-head.is-wait {
-        color: #c0c4cc;
-        border-color: #c0c4cc;
-    }
-
-    .step-head.is-finish {
-        color: #409eff;
-        border-color: #409eff;
-    }
-
-    .step-head.is-error {
-        color: #f56c6c;
-        border-color: #f56c6c;
-    }
-
-.step-main {
-    white-space: normal;
-    text-align: left;
-}
-
-.step-title {
-    font-size: 14px;
-    line-height: 38px;
-}
-
-    .step-title.is-success {
-        color: #67c23a;
-    }
-
-    .step-title.is-finish {
-        color: #409eff;
-    }
-
-    .step-title.is-process {
-        font-weight: 700;
-        color: #303133;
-    }
-
-    .step-title.is-wait {
-        color: #c0c4cc;
-    }
-
-    .step-title.is-error {
-        color: #f56c6c;
-    }
-
-.step-description {
-    padding-right: 10%;
-    margin-top: -5px;
-    font-size: 12px;
-    line-height: 20px;
-    font-weight: 400;
-}
-
-    .step-description.is-success {
-        color: #67c23a;
-    }
-
-    .step-description.is-finish {
-        color: #409eff;
-    }
-
-    .step-description.is-process {
-        color: #303133;
-    }
-
-    .step-description.is-wait {
-        color: #c0c4cc;
-    }
-
-.step.is-center .step-description {
-    padding-left: 20%;
-    padding-right: 20%;
-}
-
-.step-line {
-    position: absolute;
-    border-color: inherit;
-    background-color: #c0c4cc;
-}
-
-.step.is-horizontal .step-line {
-    height: 2px;
-    top: 11px;
-    left: 0;
-    right: 0;
-}
-
-.step.is-center .step-line {
-    left: 50%;
-    right: -50%;
-}
-
-.step-line-inner {
-    display: block;
-    border: 1px solid;
-    border-color: inherit;
-    transition: .15s ease-out;
-    box-sizing: border-box;
-    width: 0;
-    height: 0;
-}
-
-.step:last-of-type .step-line {
-    display: none;
-}
-
-.step-icon {
-    position: relative;
-    z-index: 1;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 24px;
-    height: 24px;
-    font-size: 14px;
-    box-sizing: border-box;
-    background: #fff;
-    transition: .15s ease-out;
-}
-
-    .step-icon.is-text {
-        border-radius: 50%;
-        border: 2px solid;
-        border-color: inherit;
-    }
-
-    .step-icon.is-icon {
-        width: 40px;
-    }
-
-.step-icon-inner {
-    display: inline-block;
-    user-select: none;
-    text-align: center;
-    font-weight: 700;
-    line-height: 1;
-    color: inherit;
-    font-style: normal;
-}
-
-    .step-icon-inner[class*=fa]:not(.is-status) {
-        font-size: 25px;
-        font-weight: 400;
-    }
-
-.step:last-of-type.is-flex {
-    flex-basis: auto !important;
-    flex-shrink: 0;
-    flex-grow: 0;
-}
-/*end step*/
-
 /*circle*/
 .circle {
     display: inline-block;
@@ -929,4 +746,90 @@ form .form-label[required]:before {
     position: absolute;
     top: 35%;
     width: 100%;
+}
+
+/*pulse*/
+.pulse {
+    position: relative
+}
+
+    .pulse.pulse-white .pulse-ring {
+        border-color: #fff
+    }
+
+    .pulse.pulse-light .pulse-ring {
+        border-color: #f5f8fa
+    }
+
+    .pulse.pulse-primary .pulse-ring {
+        border-color: #009ef7
+    }
+
+    .pulse.pulse-secondary .pulse-ring {
+        border-color: #e4e6ef
+    }
+
+    .pulse.pulse-success .pulse-ring {
+        border-color: #50cd89
+    }
+
+    .pulse.pulse-info .pulse-ring {
+        border-color: #7239ea
+    }
+
+    .pulse.pulse-warning .pulse-ring {
+        border-color: #ffc700
+    }
+
+    .pulse.pulse-danger .pulse-ring {
+        border-color: #f1416c
+    }
+
+    .pulse.pulse-dark .pulse-ring {
+        border-color: #181c32
+    }
+
+.pulse-ring {
+    display: block;
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    animation: animation-pulse 3.5s ease-out;
+    animation-iteration-count: infinite;
+    opacity: 0;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #a1a5b7
+}
+
+@keyframes animation-pulse {
+    0% {
+        -webkit-transform: scale(.1,.1);
+        opacity: 0
+    }
+
+    60% {
+        -webkit-transform: scale(.1,.1);
+        opacity: 0
+    }
+
+    65% {
+        opacity: 1
+    }
+
+    100% {
+        -webkit-transform: scale(1.2,1.2);
+        opacity: 0
+    }
+}
+/*end pulse*/
+
+.fs-on,
+.fs-open .fs {
+    display: none;
+}
+
+.fs-open .fs-on {
+    display: block;
 }

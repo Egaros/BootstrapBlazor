@@ -39,7 +39,7 @@ namespace BootstrapBlazor.Shared.Pages.Table
 
         private bool _confirm;
 
-        private IEnumerable<Foo> SelectedRows { get; set; } = Enumerable.Empty<Foo>();
+        private List<Foo> SelectedRows { get; set; } = new List<Foo>();
 
         /// <summary>
         /// 
@@ -75,7 +75,7 @@ namespace BootstrapBlazor.Shared.Pages.Table
             await ProductTable.QueryAsync();
         }
 
-        private Task<bool> OnSaveAsync(Foo item)
+        private Task<bool> OnSaveAsync(Foo item, ItemChangedType changedType)
         {
             var oldItem = Products.FirstOrDefault(i => i.Id == item.Id);
             if (oldItem != null)
