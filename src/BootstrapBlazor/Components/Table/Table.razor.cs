@@ -885,11 +885,24 @@ namespace BootstrapBlazor.Components
         private static ConcurrentDictionary<(Type Type, string PropertyName), Func<TItem, object?>> GetPropertyCache { get; } = new();
         #endregion
 
-        private RenderFragment RenderCell(ITableColumn col, TItem? item = default) => col.EditTemplate == null
-            ? (col.Readonly
-                ? builder => builder.CreateDisplayByFieldType(this, col, item ?? EditModel, false)
-                : builder => builder.CreateComponentByFieldType(this, col, item ?? EditModel, false))
-            : col.EditTemplate.Invoke(EditModel);
+        private RenderFragment RenderCell(ITableColumn col, TItem? item = default)
+        {
+            if (IsExcel)
+            {
+                var onValueChanged = Utility.CreateOnValueChanged<TItem>(col.PropertyType).Compile();
+                col.ComponentParameters = new KeyValuePair<string, object>[]
+                {
+                    new(nameof(ValidateBase<string>.OnValueChanged), onValueChanged.Invoke(item!, col, (model, col, val) => {
+                        return Task.CompletedTask;
+                    }))
+                };
+            }
+            return col.EditTemplate == null
+                ? (col.Readonly
+                    ? builder => builder.CreateDisplayByFieldType(this, col, item ?? EditModel, false)
+                    : builder => builder.CreateComponentByFieldType(this, col, item ?? EditModel, false))
+                : col.EditTemplate.Invoke(EditModel);
+        }
 
         #region Filter
         /// <summary>

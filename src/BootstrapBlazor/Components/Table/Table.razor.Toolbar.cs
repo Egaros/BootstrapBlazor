@@ -239,18 +239,18 @@ namespace BootstrapBlazor.Components
                 {
                     RowItems.Insert(0, EditModel);
                 }
-                if (EditMode == EditMode.Popup)
+                if (!IsExcel && EditMode == EditMode.Popup)
                 {
                     await ShowEditDialog(ItemChangedType.Add);
                 }
-                else if (EditMode == EditMode.EditForm)
+                else if (!IsExcel && EditMode == EditMode.EditForm)
                 {
                     ShowAddForm = true;
                     ShowEditForm = false;
 
                     await UpdateAsync();
                 }
-                else if (EditMode == EditMode.InCell)
+                else if (IsExcel || EditMode == EditMode.InCell)
                 {
                     AddInCell = true;
                     EditInCell = true;
@@ -392,6 +392,15 @@ namespace BootstrapBlazor.Components
             }
 
             return valid;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected Task ExcelSaveAsync()
+        {
+            return Task.CompletedTask;
         }
 
         /// <summary>
