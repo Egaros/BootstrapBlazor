@@ -24,6 +24,12 @@ namespace BootstrapBlazor.Components
         private JSInterop<Select<TValue>>? Interop { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Inject]
+        private SwalService? SwalService { get; set; }
+
+        /// <summary>
         /// 获得 样式集合
         /// </summary>
         private string? ClassName => CssBuilder.Default("select dropdown")
@@ -231,15 +237,49 @@ namespace BootstrapBlazor.Components
         {
             if (!IsDisabled && !item.IsDisabled)
             {
-                item.Active = true;
-                SelectedItem = item;
-                CurrentValueAsString = item.Value;
-
-                // 触发 SelectedItemChanged 事件
-                if (OnSelectedItemChanged != null)
+                if (OnBeforeClickChange != null)
                 {
-                    await OnSelectedItemChanged.Invoke(SelectedItem);
+                    var before = await OnBeforeClickChange(item);
+                    if (before)
+                    {
+                        var option = new SwalOption()
+                        {
+                            Category = Category,
+                            Content = Content,
+                            IsConfirm = true
+                        };
+                        var ret = await SwalService!.ShowModal(option);
+                        if (ret)
+                        {
+                            await ItemChanged(item);
+                        }
+                    }
+                    else
+                    {
+                        await ItemChanged(item);
+                    }
                 }
+                else
+                {
+                    await ItemChanged(item);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private async Task ItemChanged(SelectedItem item)
+        {
+            item.Active = true;
+            SelectedItem = item;
+            CurrentValueAsString = item.Value;
+
+            // 触发 SelectedItemChanged 事件
+            if (OnSelectedItemChanged != null)
+            {
+                await OnSelectedItemChanged.Invoke(SelectedItem);
             }
         }
 

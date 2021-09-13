@@ -27,6 +27,24 @@ namespace BootstrapBlazor.Components
         public Color Color { get; set; } = Color.None;
 
         /// <summary>
+        /// 获得/设置 SWal 图标
+        /// </summary>
+        [Parameter]
+        public SwalCategory Category { get; set; } = SwalCategory.Question;
+
+        /// <summary>
+        /// 获得/设置 SWal 内容
+        /// </summary>
+        [Parameter]
+        public string Content { get; set; } = "确定改变当前值吗？";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Parameter]
+        public Func<SelectedItem, Task<bool>>? OnBeforeClickChange { get; set; }
+
+        /// <summary>
         /// 获得/设置 绑定数据集
         /// </summary>
         [Parameter]

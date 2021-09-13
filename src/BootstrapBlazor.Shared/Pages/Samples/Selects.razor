@@ -246,6 +246,14 @@
         </div>
     </div>
 </Block>
+<Block Title="带 SweetAlert 的下拉框" Introduction="通过设置 <code>OnBeforeClickChange</code> 委托，阻止当前值的改变">
+    <div class="row g-3">
+        <div class="col-12 col-sm-6">
+            <Select TValue="string" Items="Items" OnBeforeClickChange="@OnBeforeClickChange" />
+        </div>
+    </div>
+</Block>
+<SweetAlert />
 
 <AttributeTable Items="@GetAttributes()" />
 
