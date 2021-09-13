@@ -518,8 +518,7 @@
 }
 
     .table-cell.is-incell .switch {
-        height: 35px;
-        padding-left: 9px;
+        padding-left: 6px;
     }
 
     .table-cell.is-incell .select {
@@ -587,3 +586,12 @@ form .table .table-cell > textarea {
     display: none;
     position: absolute;
 }
+
+.table-excel tbody .table-cell {
+    margin: -7px -6px;
+}
+
+    .table-excel tbody .table-cell .switch {
+        padding-left: 0;
+        height: 35px;
+    }
