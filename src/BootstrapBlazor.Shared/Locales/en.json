@@ -920,6 +920,7 @@
     "Att3": "Component values are used for bidirectional binding",
     "Att4": "Whether to arrange vertically",
     "Event1": "Call back this method when the state of the check box changes"
+  },
   "BootstrapBlazor.Shared.Pages.ColorPickers": {
     "Title": "ColorPicker Color Picker",
     "H1": "Select color to use",

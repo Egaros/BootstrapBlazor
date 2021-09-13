@@ -920,6 +920,7 @@
     "Att3": "组件值用于双向绑定",
     "Att4": "是否竖向排列",
     "Event1": "复选框状态改变时回调此方法"
+  },
   "BootstrapBlazor.Shared.Pages.ColorPickers": {
     "Title": "ColorPicker 颜色拾取器",
     "H1": "选择颜色使用",
