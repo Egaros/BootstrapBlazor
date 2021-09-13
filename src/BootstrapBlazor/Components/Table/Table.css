@@ -588,8 +588,13 @@ form .table .table-cell > textarea {
 }
 
 .table-excel tbody .table-cell {
-    margin: -7px -6px;
+    margin: -6px;
 }
+
+    .table-excel tbody .table-cell > .form-check {
+        margin-left: 6px;
+        margin-top: 6px;
+    }
 
     .table-excel tbody .table-cell .switch {
         padding-left: 0;
