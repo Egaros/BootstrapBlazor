@@ -1,0 +1,290 @@
+repo_name: Egaros/BootstrapBlazor
+report_id: bed5167904fb316db95722c5988984a8
+version: 0.1
+repo_type: Public
+timestamp: '2024-02-29T19:41:05+00:00'
+requested_by: zph19970424
+provider: github
+branch: main
+detected_tools_count: 22
+tools:
+- name: C#
+  description: Simple, general-purpose, object-oriented programming language for the
+    .NET platform
+  website_url: http://csharp.net
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1015/1200px-C_Sharp_wordmark.svg.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor
+  detection_source: Repo Metadata
+- name: CSS 3
+  description: The latest evolution of the Cascading Style Sheets language
+  website_url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor
+  detection_source: Repo Metadata
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor
+  detection_source: Repo Metadata
+- name: ".NET"
+  description: A free, cross-platform, open source developer platform for building
+    many different types of applications
+  website_url: http://www.microsoft.com/net/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/1014/IoPy1dce_400x400.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/test/UnitTest/UnitTest.csproj
+  detection_source: test/UnitTest/UnitTest.csproj
+  last_updated_by: Argo
+  last_updated_on: 2021-05-29 02:06:38.000000000 Z
+- name: ASP.NET Core
+  description: A cross-platform .NET framework for building modern cloud-based web
+    applications on Windows, Mac, or Linux
+  website_url: docs.microsoft.com/en-us/aspnet/core/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/11331/asp.net-core.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/src/BootstrapBlazor/BootstrapBlazor.csproj
+  detection_source: src/BootstrapBlazor/BootstrapBlazor.csproj
+  last_updated_by: Argo
+  last_updated_on: 2021-09-10 11:48:29.000000000 Z
+- name: Docker
+  description: Enterprise Container Platform for High-Velocity Innovation.
+  website_url: https://www.docker.com/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Virtual Machine Platforms & Containers
+  image_url: https://img.stackshare.io/service/586/n4u37v9t_400x400.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor
+  detection_source: Repo Metadata
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor
+  detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/.github/workflows/build.yml
+  detection_source: ".github/workflows/build.yml"
+  last_updated_by: Argo
+  last_updated_on: 2021-04-21 08:30:46.000000000 Z
+- name: NuGet
+  description: The package manager for .NET
+  website_url: https://www.nuget.org/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/service/2637/6I3oEOP4_400x400.jpg
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/test/UnitTest/UnitTest.csproj
+  detection_source: test/UnitTest/UnitTest.csproj
+  last_updated_by: Argo
+  last_updated_on: 2020-06-29 16:22:21.000000000 Z
+- name: Visual Studio
+  description: State-of-the-art tools and services that you can use to create great
+    apps for devices, the cloud, and everything in between.
+  website_url: http://msdn.microsoft.com/en-us/vstudio/aa718325.aspx
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Integrated Development Environment
+  image_url: https://img.stackshare.io/service/1451/SR2hUhQN.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/BootstrapBlazor.sln
+  detection_source: BootstrapBlazor.sln
+  last_updated_by: Argo
+  last_updated_on: 2020-03-24 17:02:25.000000000 Z
+- name: xUnit
+  description: An open source, community-focused unit testing tool
+  website_url: http://xunit.github.io/
+  version: 2.4.1
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Testing Frameworks
+  image_url: https://img.stackshare.io/service/3077/ca5a327feb49ddfe1f4b11548907e5a1_400x400.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/test/UnitTest/UnitTest.csproj
+  detection_source: test/UnitTest/UnitTest.csproj
+  last_updated_by: Argo
+  last_updated_on: 2020-06-29 16:22:21.000000000 Z
+- name: PowerShell
+  description: A task automation and configuration management framework
+  website_url: https://docs.microsoft.com/en-us/powershell/
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/3681/powershell-logo.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor
+  detection_source: Repo Metadata
+- name: Shell
+  description: A shell is a text-based terminal, used for manipulating programs and
+    files. Shell scripts typically manage program execution.
+  website_url: https://en.wikipedia.org/wiki/Shell_script
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor
+  detection_source: Repo Metadata
+- name: EPPlus
+  description: Create advanced Excel spreadsheets using .NET
+  package_url: https://www.nuget.org/EPPlus
+  version: 4.5.3
+  license: Other
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: NuGet Packages
+  image_url: https://img.stackshare.io/package/13056/default_ed36ff3c005af695725e05bb15ea5b1f03de31f3.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/src/Extensions/Components/BootstrapBlazor.TableExport/BootstrapBlazor.TableExport.csproj
+  detection_source: src/Extensions/Components/BootstrapBlazor.TableExport/BootstrapBlazor.TableExport.csproj
+  last_updated_by: Argo-Cloud
+  last_updated_on: 2021-03-11 02:28:50.000000000 Z
+- name: Microsoft.AspNetCore.Components.Web
+  description: Support for rendering ASP.NET Core components for browsers
+  package_url: https://www.nuget.org/Microsoft.AspNetCore.Components.Web
+  version: '5.0'
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: NuGet Packages
+  image_url: https://img.stackshare.io/package/13128/default_59c6e81d6f4034b10a10bd52ec71c48c8d66e4eb.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/src/BootstrapBlazor/BootstrapBlazor.csproj
+  detection_source: src/BootstrapBlazor/BootstrapBlazor.csproj
+  last_updated_by: Argo
+  last_updated_on: 2021-09-10 11:48:29.000000000 Z
+- name: Microsoft.AspNetCore.Http
+  description: ASP.NET Core default HTTP feature implementations
+  package_url: https://www.nuget.org/Microsoft.AspNetCore.Http
+  version: 2.2.2
+  open_source: false
+  hosted_saas: false
+  category: Libraries
+  sub_category: NuGet Packages
+  image_url: https://img.stackshare.io/package/12937/default_bd8397841d0aa5de035298a9130ee2dc9d9b0ece.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/src/BootstrapBlazor/BootstrapBlazor.csproj
+  detection_source: src/BootstrapBlazor/BootstrapBlazor.csproj
+  last_updated_by: Argo
+  last_updated_on: 2021-09-10 11:48:29.000000000 Z
+- name: Microsoft.EntityFrameworkCore
+  description: Entity Framework Core is a lightweight and extensible version of the
+    popular Entity Framework data access technology
+  package_url: https://www.nuget.org/Microsoft.EntityFrameworkCore
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: NuGet Packages
+  image_url: https://img.stackshare.io/package/12852/default_ccf90b566c21ad9eaa59733f297e535ea39fb3b4.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/src/Extensions/DataServices/BootstrapBlazor.DataAcces.EntityFrameworkCore/BootstrapBlazor.DataAcces.EntityFrameworkCore.csproj
+  detection_source: src/Extensions/DataServices/BootstrapBlazor.DataAcces.EntityFrameworkCore/BootstrapBlazor.DataAcces.EntityFrameworkCore.csproj
+  last_updated_by: Argo
+  last_updated_on: 2021-08-11 11:13:32.000000000 Z
+- name: Microsoft.Extensions.Configuration.Json
+  description: JSON configuration provider implementation for Microsoft.Extensions.Configuration
+  package_url: https://www.nuget.org/Microsoft.Extensions.Configuration.Json
+  version: '5.0'
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: NuGet Packages
+  image_url: https://img.stackshare.io/package/12865/default_4ea11141d2970a66e9637b71cf054ab66968c217.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/src/BootstrapBlazor/BootstrapBlazor.csproj
+  detection_source: src/BootstrapBlazor/BootstrapBlazor.csproj
+  last_updated_by: Argo
+  last_updated_on: 2021-09-11 16:04:06.000000000 Z
+- name: Microsoft.Extensions.Http
+  description: The HttpClient factory is a pattern for configuring and retrieving
+    named HttpClients in a composable way
+  package_url: https://www.nuget.org/Microsoft.Extensions.Http
+  version: 5.0.0
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: NuGet Packages
+  image_url: https://img.stackshare.io/package/12940/default_54d470a1e19c265eb229b6bd88965fb8df9f9f78.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/src/BootstrapBlazor/BootstrapBlazor.csproj
+  detection_source: src/BootstrapBlazor/BootstrapBlazor.csproj
+  last_updated_by: Argo
+  last_updated_on: 2021-09-11 16:04:06.000000000 Z
+- name: Microsoft.Extensions.Localization
+  description: Application localization services and default implementation based
+    on ResourceManager to load localized assembly resources
+  package_url: https://www.nuget.org/Microsoft.Extensions.Localization
+  version: '5.0'
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: NuGet Packages
+  image_url: https://img.stackshare.io/package/13297/default_1e1f93823dcbf467a805adfd578c74f8f54c6a4e.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/src/BootstrapBlazor/BootstrapBlazor.csproj
+  detection_source: src/BootstrapBlazor/BootstrapBlazor.csproj
+  last_updated_by: Argo
+  last_updated_on: 2021-09-11 16:04:06.000000000 Z
+- name: Microsoft.Extensions.Options.ConfigurationExtensions
+  description: Provides additional configuration specific functionality related to
+    Options
+  package_url: https://www.nuget.org/Microsoft.Extensions.Options.ConfigurationExtensions
+  version: '5.0'
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: NuGet Packages
+  image_url: https://img.stackshare.io/package/12882/default_d56a77cbb06d3dae6daef9669108e3e01d2494af.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/src/BootstrapBlazor/BootstrapBlazor.csproj
+  detection_source: src/BootstrapBlazor/BootstrapBlazor.csproj
+  last_updated_by: Argo
+  last_updated_on: 2021-09-11 16:04:06.000000000 Z
+- name: xunit.runner.visualstudio
+  description: Visual Studio 2012+ Test Explorer runner for the xUnit.net framework
+  package_url: https://www.nuget.org/xunit.runner.visualstudio
+  version: 2.4.3
+  license: Other
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: NuGet Packages
+  image_url: https://img.stackshare.io/package/13260/default_d2db5a200c4fe2d08cbdb2174cc230708973870b.png
+  detection_source_url: https://github.com/Egaros/BootstrapBlazor/blob/main/test/UnitTest/UnitTest.csproj
+  detection_source: test/UnitTest/UnitTest.csproj
+  last_updated_by: Argo
+  last_updated_on: 2021-03-21 09:57:01.000000000 Z
